@@ -1,5 +1,6 @@
 <?php
 use PHPUnit\Framework\TestCase;
+require_once __DIR__ . '/GameOfLife.php';
 
 class GameOfLifeTest extends TestCase
 {
@@ -8,7 +9,7 @@ class GameOfLifeTest extends TestCase
         $rows = 5;
         $cols = 5;
         $game = new GameOfLife($rows, $cols);
-        $game->placeGlider(); 
+        $game->placeGliderInCenter(); 
 
         $expectedGen0 = [
             [0, 1, 0, 0, 0],
@@ -19,7 +20,7 @@ class GameOfLifeTest extends TestCase
         ];
         $this->assertEquals($expectedGen0, $game->getGrid());
 
-        $game->nextGeneration();
+        $game->step();
         $expectedGen1 = [
             [0, 0, 0, 0, 0],
             [1, 0, 1, 0, 0],
@@ -29,7 +30,7 @@ class GameOfLifeTest extends TestCase
         ];
         $this->assertEquals($expectedGen1, $game->getGrid());
   
-        $game->nextGeneration();
+        $game->step();
         $expectedGen2 = [
             [0, 0, 0, 0, 0],
             [0, 1, 0, 0, 0],
